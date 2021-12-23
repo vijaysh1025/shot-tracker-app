@@ -1,0 +1,99 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.example.shot_tracker_app"
+        minSdk build_versions.min_sdk
+        targetSdk build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion '1.5.21'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation deps.core.ktx
+    implementation deps.core.appcompat
+    implementation deps.core.lifecycle
+    implementation deps.core.activity
+
+    implementation deps.ui.material
+    implementation deps.ui.compose_ui
+    implementation deps.ui.compose_material
+    implementation deps.ui.compose_preview
+    implementation deps.ui.compose_livedata
+
+    implementation deps.nav.fragment
+    implementation deps.nav.ui
+    implementation deps.nav.compose
+
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.moshi
+    implementation deps.moshi.kotlin
+    implementation deps.moshi.adapters
+    kapt deps.moshi.codegen
+    implementation deps.room.runtime
+    implementation deps.room.ktx
+    kapt deps.room.compiler
+    implementation deps.gson
+
+    implementation deps.hilt.android
+    kapt deps.hilt.compiler
+
+    testImplementation deps.testing.junit
+    androidTestImplementation deps.testing.junit_ext
+    androidTestImplementation deps.testing.espresso
+    androidTestImplementation deps.testing.ui_junit
+    debugImplementation deps.testing.ui_tooling
+}
+
+kapt {
+    correctErrorTypes = true
+}

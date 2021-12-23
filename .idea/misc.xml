@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../layout/compose-model-1639086201836.xml" value="0.20819256756756757" />
+        <entry key="../../../../../layout/compose-model-1639670627593.xml" value="0.23310810810810811" />
+        <entry key="../../../../../layout/compose-model-1639671305551.xml" value="1.0" />
+        <entry key="../../../../../layout/compose-model-1639680332525.xml" value="0.33699324324324326" />
+        <entry key="../../../../../layout/compose-model-1639687022368.xml" value="0.33699324324324326" />
+        <entry key="../../../../../layout/compose-model-1639687272922.xml" value="0.33699324324324326" />
+        <entry key="../../../../../layout/compose-model-1639695864642.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1639767958495.xml" value="0.33699324324324326" />
+        <entry key="../../../../../layout/compose-model-1639775265803.xml" value="0.175" />
+        <entry key="../../../../../layout/compose-model-1640109104102.xml" value="0.10343583525365928" />
+        <entry key="../../../../../layout/compose-model-1640109157337.xml" value="0.22" />
+        <entry key="../../../../../layout/compose-model-1640116764531.xml" value="0.19298986486486486" />
+        <entry key="../../../../../layout/compose-model-1640117674851.xml" value="0.3264358108108108" />
+        <entry key="../../../../../layout/compose-model-1640117837654.xml" value="0.3264358108108108" />
+        <entry key="app/src/main/res/drawable/button_bg.xml" value="0.40520833333333334" />
+        <entry key="app/src/main/res/drawable/court_anim.xml" value="0.26875" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.40520833333333334" />
+        <entry key="app/src/main/res/drawable/progress.xml" value="0.40520833333333334" />
+        <entry key="app/src/main/res/drawable/shot_spot_circle_to_x.xml" value="0.40520833333333334" />
+        <entry key="app/src/main/res/drawable/shot_spot_x_to_circle.xml" value="0.40520833333333334" />
+        <entry key="app/src/main/res/drawable/vd_vector.xml" value="0.40520833333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

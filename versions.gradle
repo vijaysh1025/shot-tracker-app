@@ -1,0 +1,87 @@
+ext.deps = [:]
+ext.versions = [:]
+
+def versions = [:]
+versions.hilt = '2.38.1'
+versions.ktx = '1.7.0'
+versions.appcompat = '1.4.0'
+versions.lifecycle = '2.4.0'
+versions.material = '1.4.0'
+versions.compose = '1.0.5'
+versions.activity = '1.4.0'
+
+versions.junit = '1.1.3'
+versions.espresso = '3.4.0'
+
+versions.retrofit = '2.9.0'
+versions.moshi = '1.12.0'
+
+versions.room = '2.3.0'
+
+versions.gson = '2.8.6'
+
+versions.nav = '2.3.5'
+
+def deps = [:]
+
+def core = [:]
+core.ktx = "androidx.core:core-ktx:$versions.ktx"
+core.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+core.lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
+core.activity = "androidx.activity:activity-compose:$versions.activity"
+deps.core = core
+
+def ui = [:]
+ui.material = "com.google.android.material:material:$versions.material"
+ui.compose_ui = "androidx.compose.ui:ui:$versions.compose"
+ui.compose_material = "androidx.compose.material:material:$versions.compose"
+ui.compose_preview = "androidx.compose.ui:ui-tooling-preview:$versions.compose"
+ui.compose_livedata = "androidx.compose.runtime:runtime-livedata:$versions.compose"
+deps.ui = ui
+
+def nav = [:]
+nav.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.nav"
+nav.ui = "androidx.navigation:navigation-ui-ktx:$versions.nav"
+nav.compose = "androidx.navigation:navigation-compose:2.4.0-rc01"
+deps.nav = nav
+
+def hilt = [:]
+hilt.android = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.compiler = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+deps.hilt = hilt
+
+def testing = [:]
+testing.junit = 'junit:junit:4.+'
+testing.junit_ext = "androidx.test.ext:junit:$versions.junit"
+testing.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+testing.ui_junit = "androidx.compose.ui:ui-test-junit4:$versions.compose"
+testing.ui_tooling = "androidx.compose.ui:ui-tooling:$versions.compose"
+deps.testing = testing
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.moshi = "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
+deps.retrofit = retrofit
+
+def moshi = [:]
+moshi.kotlin = "com.squareup.moshi:moshi-kotlin:$versions.moshi"
+moshi.adapters = "com.squareup.moshi:moshi-adapters:$versions.moshi"
+moshi.codegen = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
+deps.moshi = moshi
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.ktx = "androidx.room:room-ktx:$versions.room"
+deps.room = room
+
+
+deps.gson = "com.google.code.gson:gson:$versions.gson"
+
+ext.deps = deps
+ext.versions = versions
+
+def build_versions = [:]
+build_versions.min_sdk = 21
+build_versions.target_sdk = 30
+ext.build_versions = build_versions

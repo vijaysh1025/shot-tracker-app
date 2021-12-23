@@ -1,0 +1,224 @@
+{
+  "date": "2021-11-23",
+  "league": {
+    "id": "4353138d-4c22-4396-95d8-5f587d2df25c",
+    "name": "NBA",
+    "alias": "NBA"
+  },
+  "games": [
+    {
+      "id": "554b2349-328b-4836-96ae-a944d8dfb5dc",
+      "status": "closed",
+      "coverage": "full",
+      "scheduled": "2021-11-24T00:00:00Z",
+      "home_points": 92,
+      "away_points": 100,
+      "track_on_court": true,
+      "sr_id": "sr:match:28809366",
+      "reference": "0022100263",
+      "time_zones": {
+        "venue": "US/Eastern",
+        "home": "US/Eastern",
+        "away": "US/Eastern"
+      },
+      "venue": {
+        "id": "5a9ddefc-2267-4fd1-8d6e-0f82163ce8bd",
+        "name": "Little Caesars Arena",
+        "capacity": 20491,
+        "address": "2645 Woodward Avenue",
+        "city": "Detroit",
+        "state": "MI",
+        "zip": "48201",
+        "country": "USA",
+        "sr_id": "sr:venue:21782"
+      },
+      "broadcasts": [
+        {
+          "network": "BSSUN",
+          "type": "TV",
+          "locale": "Away",
+          "channel": "653"
+        },
+        {
+          "network": "BSDET",
+          "type": "TV",
+          "locale": "Home",
+          "channel": "663"
+        }
+      ],
+      "home": {
+        "name": "Detroit Pistons",
+        "alias": "DET",
+        "id": "583ec928-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3424",
+        "reference": "1610612765"
+      },
+      "away": {
+        "name": "Miami Heat",
+        "alias": "MIA",
+        "id": "583ecea6-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3435",
+        "reference": "1610612748"
+      }
+    },
+    {
+      "id": "b7c8460a-17ef-4818-8fcb-527228222ce6",
+      "status": "closed",
+      "coverage": "full",
+      "scheduled": "2021-11-24T00:30:00Z",
+      "home_points": 106,
+      "away_points": 100,
+      "track_on_court": true,
+      "sr_id": "sr:match:28808352",
+      "reference": "0022100264",
+      "time_zones": {
+        "venue": "US/Eastern",
+        "home": "US/Eastern",
+        "away": "US/Pacific"
+      },
+      "venue": {
+        "id": "583152aa-de75-5bea-ac92-ac5b8a51f9f9",
+        "name": "Madison Square Garden",
+        "capacity": 19812,
+        "address": "4 Pennsylvania Plaza",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10001",
+        "country": "USA",
+        "sr_id": "sr:venue:6054"
+      },
+      "broadcasts": [
+        {
+          "network": "TNT",
+          "type": "TV",
+          "locale": "National",
+          "channel": "245"
+        },
+        {
+          "network": "SportsNet LA",
+          "type": "TV",
+          "locale": "Away",
+          "channel": "691"
+        }
+      ],
+      "home": {
+        "name": "New York Knicks",
+        "alias": "NYK",
+        "id": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3421",
+        "reference": "1610612752"
+      },
+      "away": {
+        "name": "Los Angeles Lakers",
+        "alias": "LAL",
+        "id": "583ecae2-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3427",
+        "reference": "1610612747"
+      }
+    },
+    {
+      "id": "28f383dd-03a7-4057-a24b-9fa718570d4e",
+      "status": "closed",
+      "coverage": "full",
+      "scheduled": "2021-11-24T03:00:00Z",
+      "home_points": 119,
+      "away_points": 100,
+      "track_on_court": true,
+      "sr_id": "sr:match:28809838",
+      "reference": "0022100265",
+      "time_zones": {
+        "venue": "US/Pacific",
+        "home": "US/Pacific",
+        "away": "US/Mountain"
+      },
+      "venue": {
+        "id": "1d1f74a2-7b35-56f0-8cbd-552c51cb2c14",
+        "name": "Moda Center",
+        "capacity": 19393,
+        "address": "1 Center Court",
+        "city": "Portland",
+        "state": "OR",
+        "zip": "97227",
+        "country": "USA",
+        "sr_id": "sr:venue:6940"
+      },
+      "broadcasts": [
+        {
+          "network": "TNT",
+          "type": "TV",
+          "locale": "National",
+          "channel": "245"
+        }
+      ],
+      "home": {
+        "name": "Portland Trail Blazers",
+        "alias": "POR",
+        "id": "583ed056-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3414",
+        "reference": "1610612757"
+      },
+      "away": {
+        "name": "Denver Nuggets",
+        "alias": "DEN",
+        "id": "583ed102-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3417",
+        "reference": "1610612743"
+      }
+    },
+    {
+      "id": "018ab017-10c1-4c72-ba4f-13a4495013c7",
+      "status": "closed",
+      "coverage": "full",
+      "scheduled": "2021-11-24T03:30:00Z",
+      "home_points": 104,
+      "away_points": 112,
+      "track_on_court": true,
+      "sr_id": "sr:match:28809684",
+      "reference": "0022100266",
+      "time_zones": {
+        "venue": "US/Pacific",
+        "home": "US/Pacific",
+        "away": "US/Central"
+      },
+      "venue": {
+        "id": "792ec100-691e-5e16-8ef8-79b2b6ee38ba",
+        "name": "Staples Center",
+        "capacity": 18997,
+        "address": "1111 S. Figueroa Street",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zip": "90015",
+        "country": "USA",
+        "sr_id": "sr:venue:6008"
+      },
+      "broadcasts": [
+        {
+          "network": "BSSC",
+          "type": "TV",
+          "locale": "Home",
+          "channel": "693"
+        },
+        {
+          "network": "BSSW",
+          "type": "TV",
+          "locale": "Away",
+          "channel": "676"
+        }
+      ],
+      "home": {
+        "name": "LA Clippers",
+        "alias": "LAC",
+        "id": "583ecdfb-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3425",
+        "reference": "1610612746"
+      },
+      "away": {
+        "name": "Dallas Mavericks",
+        "alias": "DAL",
+        "id": "583ecf50-fb46-11e1-82cb-f4ce4684ea4c",
+        "sr_id": "sr:team:3411",
+        "reference": "1610612742"
+      }
+    }
+  ]
+}
