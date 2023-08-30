@@ -8,16 +8,17 @@ import com.shottracker.network.Result
 import com.shottracker.utils.ResUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 class DailyScheduleRemoteDataSource(
     private val nbaDataService: NbaDataService,
     @ApplicationContext private val context: Context
 ) : DailyScheduleDataSource {
-    override suspend fun getGamesForDate(date: Date): Result<DailySchedule> {
-        val dateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.US)
-        val dateId = dateFormat.format(date)
-        val dateArray = dateId.split("-")
+    override suspend fun getGamesForDate(date: LocalDate): Result<DailySchedule> {
+//        val dateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.US)
+//        val dateId = dateFormat.format(date)
+//        val dateArray = dateId.split("-")
         return mockNetworkResponse()//nbaDataService.getDailySchedule(dateArray[0],dateArray[1],dateArray[2])
     }
 

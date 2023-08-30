@@ -6,6 +6,7 @@ import com.shottracker.network.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
 import java.util.*
 
 class DailyScheduleRepositoryImpl(
@@ -17,7 +18,7 @@ class DailyScheduleRepositoryImpl(
     /**
      * Get games for give date.
      */
-    override suspend fun getGamesForDate(date: Date) : Result<DailySchedule> = withContext(ioDispatcher){
+    override suspend fun getGamesForDate(date: LocalDate) : Result<DailySchedule> = withContext(ioDispatcher){
         // Fetch games for date from DB
         var result = localDataSource.getGamesForDate(date)
 

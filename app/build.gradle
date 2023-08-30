@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.shot_tracker_app"
@@ -37,25 +37,24 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
-        useIR = true
+        jvmTarget = '17'
     }
     buildFeatures {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.5.21'
+        kotlinCompilerExtensionVersion '1.4.7'
     }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'com.example.shot_tracker_app'
 }
 
 dependencies {
@@ -64,11 +63,18 @@ dependencies {
     implementation deps.core.lifecycle
     implementation deps.core.activity
 
-    implementation deps.ui.material
-    implementation deps.ui.compose_ui
-    implementation deps.ui.compose_material
-    implementation deps.ui.compose_preview
-    implementation deps.ui.compose_livedata
+    def composeBom = platform(deps.compose.bom)
+
+    implementation composeBom
+    androidTestImplementation composeBom
+    implementation deps.compose.material3
+    implementation deps.compose.foundation
+    implementation deps.compose.ui
+    implementation deps.compose.preview
+    debugImplementation deps.compose.tooling
+
+    implementation deps.compose.viewmodel
+    implementation deps.compose.livedata
 
     implementation deps.nav.fragment
     implementation deps.nav.ui
@@ -92,7 +98,11 @@ dependencies {
     androidTestImplementation deps.testing.espresso
     androidTestImplementation deps.testing.ui_junit
     debugImplementation deps.testing.ui_tooling
+
+    implementation "dev.chrisbanes.snapper:snapper:0.3.0"
+
 }
+
 
 kapt {
     correctErrorTypes = true

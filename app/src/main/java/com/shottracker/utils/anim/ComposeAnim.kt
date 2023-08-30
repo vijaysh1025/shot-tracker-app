@@ -13,8 +13,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -40,8 +40,8 @@ fun AnimatingCalendarBox(
     modifier: Modifier,
     datePickerState: DatePickerState,
     dateButtonClicked: () -> Unit,
-    datePicked: (Date)->Unit,
-    dateText:String
+    datePicked: (Date) -> Unit,
+    dateText: String
 ) {
     val transitionData = updateTransitionData(datePickerState)
     val state = remember {
@@ -67,15 +67,19 @@ fun AnimatingCalendarBox(
                         datePicked(cal.time)
                     }
 
-                    datePicker},
+                    datePicker
+                },
                 modifier = Modifier
                     .wrapContentWidth()
                     .background(Color.White)
                     .align(Alignment.BottomCenter)
 
             )
+
             else -> Button(
-                modifier = Modifier.fillMaxSize().background(Color.Black),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black),
                 onClick = { dateButtonClicked() }) {
                 Text(text = dateText)
             }

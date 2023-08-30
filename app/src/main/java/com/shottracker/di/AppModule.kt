@@ -5,12 +5,17 @@ import androidx.room.Room
 import com.shottracker.feature.home.data.DailyScheduleDataSource
 import com.shottracker.feature.home.data.DailyScheduleRepository
 import com.shottracker.feature.home.data.DailyScheduleRepositoryImpl
+import com.shottracker.feature.home.data.PlayByPlayDataSource
+import com.shottracker.feature.home.data.PlayByPlayRepository
+import com.shottracker.feature.home.data.PlayByPlayRepositoryImpl
 import com.shottracker.feature.home.data.local.DailyScheduleLocalDataSource
 import com.shottracker.feature.home.data.remote.DailyScheduleRemoteDataSource
 import com.shottracker.feature.home.data.remote.NbaDataService
+import com.shottracker.feature.home.data.remote.PlayByPlayRemoteDataSource
 import com.shottracker.feature.home.utils.network.ApiKeyInterceptor
 import com.shottracker.feature.home.utils.network.LoggingInterceptor
 import com.shottracker.roomdb.AppDatabase
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.wapo.flagship.network.retrofit.network.CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -52,7 +57,7 @@ object AppModule {
     @Singleton
     @RemoteDSDataSource
     @Provides
-    fun provideTasksRemoteDataSource(nbaDataService: NbaDataService, @ApplicationContext context: Context): DailyScheduleDataSource {
+    fun provideDailyScheduleRemoteDataSource(nbaDataService: NbaDataService, @ApplicationContext context: Context): DailyScheduleDataSource {
         return DailyScheduleRemoteDataSource(nbaDataService, context)
     }
 
@@ -62,7 +67,7 @@ object AppModule {
     @Singleton
     @LocalDSDataSource
     @Provides
-    fun provideTasksLocalDataSource(
+    fun provideDailyScheduleLocalDataSource(
         database: AppDatabase,
         ioDispatcher: CoroutineDispatcher
     ): DailyScheduleDataSource {
@@ -70,6 +75,17 @@ object AppModule {
             database.dailyScheduleDao(), ioDispatcher
         )
     }
+
+    /**
+     * Provide this Data Source for [DailyScheduleDataSource] marked with @RemoteDSDataSource annotation
+     */
+    @Singleton
+    @RemoteDSDataSource
+    @Provides
+    fun providePlayByPlayDataSource(nbaDataService: NbaDataService, @ApplicationContext context: Context): PlayByPlayDataSource {
+        return PlayByPlayRemoteDataSource(nbaDataService, context)
+    }
+
 
     /**
      * Provide App DataBase
@@ -154,6 +170,20 @@ object NbaRepositoryModule {
     ): DailyScheduleRepository {
         return DailyScheduleRepositoryImpl(
             localTasksDataSource, remoteTasksDataSource, ioDispatcher
+        )
+    }
+
+    /**
+     * Provide repository to get Daily Schedule of games.
+     */
+    @Singleton
+    @Provides
+    fun providePlayByPlayRepository(
+        @AppModule.RemoteDSDataSource remotePlayByPlayDataSource: PlayByPlayDataSource,
+        ioDispatcher: CoroutineDispatcher
+    ): PlayByPlayRepository {
+        return PlayByPlayRepositoryImpl(
+            remotePlayByPlayDataSource, ioDispatcher
         )
     }
 }

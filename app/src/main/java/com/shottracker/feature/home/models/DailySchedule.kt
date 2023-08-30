@@ -1,10 +1,11 @@
 package com.shottracker.feature.home.models
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.shottracker.feature.home.models.pbp.Away
+import com.shottracker.feature.home.models.pbp.Home
 import com.shottracker.feature.home.typeconverters.GamesItemListTypeConverter
 import com.shottracker.feature.home.typeconverters.LeagueTypeConverter
 import com.squareup.moshi.Json
@@ -14,21 +15,20 @@ import com.squareup.moshi.JsonClass
 @Entity(tableName = "dailyschedule")
 data class DailySchedule(
 
-	@NonNull
 	@Json(name="date")
 	@PrimaryKey
 	@ColumnInfo(name = "date")
-	val date: String = "id",
+	var date: String = "",
 
 	@Json(name="league")
 	@TypeConverters(LeagueTypeConverter::class)
 	@ColumnInfo(name = "league")
-	val league: League? = null,
+	var league: League? = null,
 
 	@Json(name="games")
 	@TypeConverters(GamesItemListTypeConverter::class)
 	@ColumnInfo(name = "games")
-	val games: List<GamesItem?>? = null
+	var games: List<GamesItem?>? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -36,9 +36,6 @@ data class GamesItem(
 
 	@Json(name="coverage")
 	val coverage: String? = null,
-
-	@Json(name="time_zones")
-	val timeZones: TimeZones? = null,
 
 	@Json(name="venue")
 	val venue: Venue? = null,

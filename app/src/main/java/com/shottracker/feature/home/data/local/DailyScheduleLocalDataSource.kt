@@ -8,16 +8,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 class DailyScheduleLocalDataSource internal constructor(
     private val dailyScheduleDao: DailyScheduleDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : DailyScheduleDataSource {
-    override suspend fun getGamesForDate(date: Date): Result<DailySchedule> =
+    override suspend fun getGamesForDate(date: LocalDate): Result<DailySchedule> =
         withContext(ioDispatcher) {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-            val dateId = dateFormat.format(date)
+            val dateId = ""
             var dailySchedule:DailySchedule? = null
             try {
                 dailySchedule = dailyScheduleDao.getGamesForDate(dateId)

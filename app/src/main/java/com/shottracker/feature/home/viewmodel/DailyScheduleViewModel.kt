@@ -11,6 +11,7 @@ import com.shottracker.utils.LiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.util.*
 import javax.inject.Inject
 
@@ -34,8 +35,8 @@ class DailyScheduleViewModel @Inject constructor(
     /**
      * Hold current date picked
      */
-    private val _datePicked: LiveEvent<Date> = LiveEvent()
-    val datePicked: LiveData<Date> = _datePicked
+    private val _datePicked: LiveEvent<LocalDate> = LiveEvent()
+    val datePicked: LiveData<LocalDate> = _datePicked
 
     init {
         _dsUiState.addSource(_datePicked) {
@@ -44,7 +45,7 @@ class DailyScheduleViewModel @Inject constructor(
         dispatchDatePicked(DEFAULT_DATE)
     }
 
-    private fun fetchGames(date: Date) {
+    private fun fetchGames(date: LocalDate) {
         dispatchDsUiState(DsUiState.Loading)
         viewModelScope.launch {
             when (val result = dailyScheduleRepository.getGamesForDate(date)) {
@@ -66,7 +67,7 @@ class DailyScheduleViewModel @Inject constructor(
         _dsUiState.postValue(state)
     }
 
-    fun dispatchDatePicked(date:Date) {
+    fun dispatchDatePicked(date:LocalDate) {
         _datePicked.postValue(date)
     }
 
@@ -75,13 +76,9 @@ class DailyScheduleViewModel @Inject constructor(
     }
 
     companion object {
-        val DEFAULT_DATE: Date
+        val DEFAULT_DATE: LocalDate
             get() {
-                val cal = Calendar.getInstance()
-                cal.set(Calendar.YEAR, 2021)
-                cal.set(Calendar.MONTH, Calendar.NOVEMBER)
-                cal.set(Calendar.DAY_OF_MONTH, 23)
-                return cal.time
+                return LocalDate.now()
             }
     }
 }
