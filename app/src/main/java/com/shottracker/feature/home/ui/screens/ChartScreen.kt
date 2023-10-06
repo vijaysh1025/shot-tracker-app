@@ -56,6 +56,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.BottomCenter
+import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
@@ -63,15 +64,20 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.LinearGradientShader
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.shot_tracker_app.R
 import com.shottracker.feature.home.models.pbp.Team
 import com.shottracker.feature.home.ui.models.PlayType
@@ -82,6 +88,11 @@ import com.shottracker.feature.home.ui.models.StatUi
 import com.shottracker.feature.home.ui.models.TeamUi
 import com.shottracker.feature.home.ui.states.PbpUiState
 import com.shottracker.feature.home.viewmodel.PlayByPlayViewModel
+import com.shottracker.ui.theme.CourtArc
+import com.shottracker.ui.theme.CourtColor
+import com.shottracker.ui.theme.CourtLines
+import com.shottracker.ui.theme.Purple200
+import com.shottracker.ui.theme.Teal200
 import org.xmlpull.v1.XmlPullParser
 
 
@@ -108,7 +119,15 @@ fun ChartScreen(viewModel: PlayByPlayViewModel) {
             is PbpUiState.Success -> {
                 val homeTeam = (uiState.value as PbpUiState.Success).homeUi
                 val awayTeam = (uiState.value as PbpUiState.Success).awayUi
-                SuccessScreen(playerState, teamState, homeTeam, awayTeam,  pickPlayer, pickTeam, showCourt.value ?: false)
+                SuccessScreen(
+                    playerState,
+                    teamState,
+                    homeTeam,
+                    awayTeam,
+                    pickPlayer,
+                    pickTeam,
+                    showCourt.value ?: false
+                )
             }
         }
     }
@@ -122,26 +141,32 @@ private fun SuccessScreen(
     awayTeam: TeamUi,
     homeTeam: TeamUi,
     selectPlayer: (PlayerUi) -> Unit,
-    selectTeam: (TeamUi)-> Unit,
-    showCourt:Boolean = false
+    selectTeam: (TeamUi) -> Unit,
+    showCourt: Boolean = false
 ) {
+    val colorStops = arrayOf(
+        0.0f to Color.Transparent,
+        1.0f to Purple200
+    )
     Box(modifier = Modifier.fillMaxSize()) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .align(TopCenter)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .align(TopCenter)
         ) {
             Court(showCourt)
             playerState.value?.let {
                 ShotsMap(playerUi = it)
             }
         }
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .align(BottomCenter)
-            .shadow(elevation = 1.dp, shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
-            .padding(5.dp),
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .align(BottomCenter)
+                .background(Brush.verticalGradient(colorStops = colorStops))
+                .padding(bottom = 16.dp, top = 24.dp),
         ) {
             playerState.value?.let {
                 StatsChart(it)
@@ -149,17 +174,29 @@ private fun SuccessScreen(
             teamState.value?.players?.let {
                 PlayerPicker(players = it.values.toList(), playerState.value, selectPlayer)
             }
-            TeamPicker(teams = listOf(homeTeam,awayTeam), teamState.value, selectTeam)
+            TeamPicker(teams = listOf(homeTeam, awayTeam), teamState.value, selectTeam)
         }
     }
 }
 
+@Preview
 @Composable
-private fun Court(isVisible:Boolean = false) {
+private fun Court(isVisible: Boolean = false) {
+    val colorStops = arrayOf(
+        0.0f to CourtColor,
+        0.7f to CourtColor,
+        1.0f to Color.Transparent
+    )
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .background(Brush.verticalGradient(colorStops = colorStops))
+            .padding(start = 4.dp, top = 30.dp, end = 4.dp, bottom = 40.dp)
+            .border(
+                2.dp,
+                CourtLines
+            )
     ) {
         AnimatedVisibility(
             modifier = Modifier.align(Alignment.TopCenter), visible = isVisible, enter = scaleIn()
@@ -169,10 +206,10 @@ private fun Court(isVisible:Boolean = false) {
                     .padding(bottom = 100.dp)
                     .fillMaxWidth()
                     .height(280.dp)
-                    .padding(30.dp)
+                    .padding(start = 30.dp, end = 30.dp, bottom = 30.dp)
                     .border(
                         2.dp,
-                        Color.DarkGray,
+                        CourtLines,
                         shape = RoundedCornerShape(0.dp, 0.dp, 200.dp, 200.dp)
                     )
                     .clip(RoundedCornerShape(0.dp, 0.dp, 200.dp, 200.dp))
@@ -188,23 +225,22 @@ private fun Court(isVisible:Boolean = false) {
         ) {
             Box(
                 modifier = Modifier
-                    .padding(0.dp, 30.dp, 0.dp, 0.dp)
                     .height(190.dp)
                     .width(120.dp)
                     .border(
                         2.dp,
-                        Color.DarkGray,
+                        CourtLines,
                         shape = RoundedCornerShape(0.dp, 0.dp, 200.dp, 200.dp)
                     )
                     .clip(RoundedCornerShape(0.dp, 0.dp, 200.dp, 200.dp))
-                    .background(Color.Gray)
+                    .background(CourtArc)
             ) {
                 AnimatedVisibility(
                     modifier = Modifier.align(Alignment.BottomCenter),
                     visible = isVisible,
                     enter = scaleIn(
                         animationSpec = tween(
-                            durationMillis = 300, delayMillis = 500, easing = EaseOut
+                            durationMillis = 300, delayMillis = 1500, easing = EaseOut
                         )
                     )
                 ) {
@@ -213,7 +249,7 @@ private fun Court(isVisible:Boolean = false) {
                             .padding(bottom = 60.dp)
                             .border(
                                 2.dp,
-                                Color.DarkGray,
+                                CourtLines,
                                 shape = RoundedCornerShape(200.dp, 200.dp, 0.dp, 0.dp)
                             )
                             .width(120.dp)
@@ -234,9 +270,10 @@ fun ShotsMap(playerUi: PlayerUi) {
             .fillMaxWidth()
             .height(400.dp)
     ) {
-        playerUi.plays.filter { it.type == PlayType.SHOT_MADE || it.type == PlayType.SHOT_MISSED }.forEach {
-            Shot(it)
-        }
+        playerUi.plays.filter { it.type == PlayType.SHOT_MADE || it.type == PlayType.SHOT_MISSED }
+            .forEach {
+                Shot(it)
+            }
     }
 }
 
@@ -290,19 +327,18 @@ private fun Shot(play: PlayUi) {
 
 
 @Composable
-fun StatsChart(playerUi: PlayerUi) {
-    Column(
+fun ColumnScope.StatsChart(playerUi: PlayerUi) {
+    Row (
         modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+            .wrapContentSize()
             .padding(20.dp)
+            .align(Alignment.CenterHorizontally)
     ) {
         playerUi.stats.forEach {
-            StatBar(stat = it.value)
+            StatCircle(statUi = it.value)
         }
     }
 }
-
 
 
 @Composable
@@ -324,7 +360,7 @@ fun Chip(
         shape = RoundedCornerShape(40.dp),
         color = if (isSelected) Color.DarkGray else Color.White
     ) {
-        Box{
+        Box {
             Text(
                 text = player.name,
                 style = MaterialTheme.typography.labelLarge,
@@ -365,7 +401,6 @@ fun Chip(
         }
     }
 }
-
 
 
 fun getTeam(): List<TeamUi> = listOf(
@@ -413,6 +448,35 @@ fun ColumnScope.TeamPicker(
         }
     }
 
+}
+
+@Composable
+private fun StatCircle(statUi: StatUi) {
+    val transData = animateStat(stat = statUi)
+    Column (modifier = Modifier.wrapContentSize()) {
+        Box(modifier = Modifier.size(80.dp).padding(8.dp)) {
+            CircularProgressIndicator(
+                progress = transData.fill,
+                modifier = Modifier.fillMaxSize(),
+                color = Color.DarkGray,
+                trackColor = Color.White,
+                strokeWidth = 8.dp
+            )
+            Text(
+                modifier = Modifier.wrapContentSize().align(Center),
+                text = transData.count.toString(),
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.DarkGray
+            )
+        }
+        Text(
+            modifier = Modifier.wrapContentSize().align(Alignment.CenterHorizontally),
+            text = statUi.type.name,
+            fontSize = 12.sp,
+            color = Color.DarkGray,
+        )
+    }
 }
 
 @Composable
@@ -505,7 +569,7 @@ private fun animateCoords(play: PlayUi): TransCoords {
     }
 
     val morph = transition.animateFloat(label = "morph") {
-        when(it.type) {
+        when (it.type) {
             PlayType.SHOT_MADE -> 1.0f
             PlayType.SHOT_MISSED -> 0.0f
             else -> 0.0f
