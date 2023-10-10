@@ -25,6 +25,13 @@ versions.nav = '2.3.5'
 
 versions.viewmodel = '2.6.1'
 
+versions.firebase_auth = '21.1.0'
+
+versions.ps_auth = '20.4.1'
+
+versions.coil = '2.2.2'
+
+
 def deps = [:]
 
 def core = [:]
@@ -90,6 +97,14 @@ room.compiler = "androidx.room:room-compiler:$versions.room"
 room.ktx = "androidx.room:room-ktx:$versions.room"
 deps.room = room
 
+def auth = [:]
+auth.firebase = "com.google.firebase:firebase-auth-ktx:$versions.firebase_auth"
+auth.ps = "com.google.android.gms:play-services-auth:$versions.ps_auth"
+deps.auth = auth
+
+def coil = [:]
+coil.compose = "io.coil-kt:coil-compose:$versions.coil"
+deps.coil = coil
 
 deps.gson = "com.google.code.gson:gson:$versions.gson"
 

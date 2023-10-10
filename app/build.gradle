@@ -93,6 +93,11 @@ dependencies {
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 
+    implementation deps.auth.firebase
+    implementation deps.auth.ps
+
+    implementation deps.coil.compose
+
     testImplementation deps.testing.junit
     androidTestImplementation deps.testing.junit_ext
     androidTestImplementation deps.testing.espresso
