@@ -31,6 +31,8 @@ versions.ps_auth = '20.4.1'
 
 versions.coil = '2.2.2'
 
+versions.lottie = '6.0.0'
+
 
 def deps = [:]
 
@@ -47,6 +49,7 @@ compose.material3 = "androidx.compose.material3:material3"
 compose.foundation = "androidx.compose.foundation:foundation"
 compose.ui = "androidx.compose.ui:ui"
 compose.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-compose:$versions.viewmodel"
+compose.lifecycle = "androidx.lifecycle:lifecycle-runtime-compose:$versions.viewmodel"
 compose.livedata = "androidx.compose.runtime:runtime-livedata"
 
 compose.preview = "androidx.compose.ui:ui-tooling-preview"
@@ -107,6 +110,7 @@ coil.compose = "io.coil-kt:coil-compose:$versions.coil"
 deps.coil = coil
 
 deps.gson = "com.google.code.gson:gson:$versions.gson"
+deps.lottie = "com.airbnb.android:lottie-compose:$versions.lottie"
 
 ext.deps = deps
 ext.versions = versions

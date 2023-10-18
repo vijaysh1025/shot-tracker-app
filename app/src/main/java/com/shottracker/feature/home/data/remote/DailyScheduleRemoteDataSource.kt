@@ -15,21 +15,31 @@ class DailyScheduleRemoteDataSource(
     private val nbaDataService: NbaDataService,
     @ApplicationContext private val context: Context
 ) : DailyScheduleDataSource {
+
+    private val pbpIds = listOf(
+        R.raw.daily_schedule_2021_11_23,
+        R.raw.daily_schedule_2021_11_24,
+        R.raw.daily_schedule_2021_11_25
+    )
+
     override suspend fun getGamesForDate(date: LocalDate): Result<DailySchedule> {
 //        val dateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.US)
 //        val dateId = dateFormat.format(date)
 //        val dateArray = dateId.split("-")
-        return mockNetworkResponse()//nbaDataService.getDailySchedule(dateArray[0],dateArray[1],dateArray[2])
+
+        return mockNetworkResponse(date)//nbaDataService.getDailySchedule(dateArray[0],dateArray[1],dateArray[2])
     }
 
     override suspend fun saveGames(dailySchedule: DailySchedule) {
     }
 
-    private fun mockNetworkResponse(): Result<DailySchedule> {
+    private fun mockNetworkResponse(date: LocalDate): Result<DailySchedule> {
+        val id = pbpIds[date.dayOfMonth % 3]
+
         val schedule = ResUtil.fromRawJson(
             DailySchedule::class.java,
             context,
-            R.raw.daily_schedule_2021_11_23
+            id
         )
 
         schedule?.let {

@@ -1,12 +1,15 @@
 package com.shottracker.feature.home.ui.screens
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,13 +26,21 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
@@ -42,52 +53,91 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.map
+import com.example.shot_tracker_app.R
 import com.shottracker.feature.home.models.GamesItem
 import com.shottracker.feature.home.ui.states.DsUiState
 import com.shottracker.feature.home.viewmodel.DailyScheduleViewModel
 import com.shottracker.ui.components.DatePickerState
 import com.shottracker.ui.components.DatePickerTimeline
+import com.shottracker.ui.theme.Purple200
+import com.shottracker.ui.theme.Purple500
+import com.shottracker.ui.theme.VsColor
 import com.shottracker.utils.ResUtil
 import java.time.LocalDate
 
 /**
  * This is the Main Compose screen for this activity
  */
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @ExperimentalAnimationApi
 @Composable
-fun GamesScreen(viewModel: DailyScheduleViewModel, onGameSelected:(String?) -> Unit) {
+fun GamesScreen(viewModel: DailyScheduleViewModel, onSettingsClick: ()->Unit = {}, onGameSelected:(String?) -> Unit) {
     val uiState = viewModel.dsUiState.observeAsState(initial = DsUiState.Loading)
     val dateState = viewModel.datePicked.map { DatePickerState(it) }.observeAsState(
         DatePickerState(
             LocalDate.now())
     )
     val datePicked:(LocalDate)->Unit = {
+        Log.d("DATE_PICKED", "$it")
         viewModel.dispatchDatePicked(it)
     }
 
-    Surface(
-        color = Color.LightGray,
-        modifier = Modifier.fillMaxSize()
-    ) {
-        when (uiState.value) {
-            DsUiState.ErrorRetry -> RetryErrorScreen()
-            is DsUiState.Games -> GamesListScreen(
-                games = (uiState.value as DsUiState.Games).games,
-                onGameSelected = onGameSelected
-            )
-            DsUiState.Loading -> LoadingScreen()
-        }
-        if(uiState.value !is DsUiState.ErrorRetry) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                DatePickerTimeline(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .fillMaxWidth()
-                        .align(Alignment.BottomCenter),
-                    onDateSelected = datePicked,
-                    state = dateState.value
+    Scaffold (
+        modifier = Modifier.fillMaxSize().background(Purple200),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(text = "Daily Games")
+                },
+                navigationIcon = {
+                    IconButton( onClick = {}) {
+                        Icon(
+                            painter = painterResource(R.drawable.vd_vector),
+                            contentDescription = "Go back"
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = onSettingsClick) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings"
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Purple500,
+                    titleContentColor = Color.White,
+                    actionIconContentColor = Color.White,
+                    navigationIconContentColor = Color.White
                 )
+            )
+        }
+    ) {
+        Surface(
+            color = Color.LightGray,
+            modifier = Modifier.fillMaxSize().padding(it)
+        ) {
+            when (uiState.value) {
+                DsUiState.ErrorRetry -> RetryErrorScreen()
+                is DsUiState.Games -> GamesListScreen(
+                    games = (uiState.value as DsUiState.Games).games,
+                    onGameSelected = onGameSelected
+                )
+
+                DsUiState.Loading -> LoadingScreen()
+            }
+            if (uiState.value !is DsUiState.ErrorRetry) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    DatePickerTimeline(
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .fillMaxWidth()
+                            .align(Alignment.BottomCenter),
+                        onDateSelected = datePicked,
+                        state = dateState.value
+                    )
+                }
             }
         }
     }
@@ -116,7 +166,7 @@ fun RetryErrorScreen() {
 @Composable
 fun LoadingScreen() {
     Surface(
-        color = Color.White,
+        color = Color.LightGray,
         modifier = Modifier.fillMaxSize()
     ) {
         CircularProgressIndicator(
@@ -160,7 +210,7 @@ fun GameCard(game: GamesItem, index: Int, onGameSelected: (String?) -> Unit) {
     }
     AnimatedVisibility(
         visibleState = state,
-        enter = fadeIn(animationSpec = tween(delayMillis = index * 100))
+        enter = fadeIn(animationSpec = tween(delayMillis = index * 100)) + slideInVertically(animationSpec = tween(delayMillis = index*100)) { it + 20}
     ) {
         Card(
             modifier = Modifier
@@ -200,7 +250,7 @@ fun GameCard(game: GamesItem, index: Int, onGameSelected: (String?) -> Unit) {
                         modifier = Modifier.padding(horizontal = 10.dp)
                     ) {
                         Text(
-                            text = game.away?.alias ?: "NA",
+                            text = game.home?.alias ?: "NA",
                             style = MaterialTheme.typography.headlineSmall,
                             color = Color.Gray,
                             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -220,10 +270,10 @@ fun GameCard(game: GamesItem, index: Int, onGameSelected: (String?) -> Unit) {
                 ) {
                     Text(
                         text = "VS",
-                        style = MaterialTheme.typography.headlineSmall,
+                        style = MaterialTheme.typography.labelMedium,
                         color = Color.White,
                         modifier = Modifier
-                            .background(Color.DarkGray)
+                            .background(VsColor)
                             .padding(10.dp)
                     )
                 }
@@ -237,7 +287,7 @@ fun GameCard(game: GamesItem, index: Int, onGameSelected: (String?) -> Unit) {
                         modifier = Modifier.padding(horizontal = 10.dp)
                     ) {
                         Text(
-                            text = game.home?.alias ?: "NA",
+                            text = game.away?.alias ?: "NA",
                             style = MaterialTheme.typography.headlineSmall,
                             color = Color.Gray,
                             modifier = Modifier.align(Alignment.CenterHorizontally)

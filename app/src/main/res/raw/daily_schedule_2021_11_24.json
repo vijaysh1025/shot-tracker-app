@@ -1,5 +1,5 @@
 {
-  "date": "2021-11-23",
+  "date": "2021-11-24",
   "league": {
     "id": "4353138d-4c22-4396-95d8-5f587d2df25c",
     "name": "NBA",
@@ -47,15 +47,15 @@
         }
       ],
       "home": {
-        "name": "Brooklyn Nets",
-        "alias": "BKN",
+        "name": "Detroit Pistons",
+        "alias": "DET",
         "id": "583ec928-fb46-11e1-82cb-f4ce4684ea4c",
         "sr_id": "sr:team:3424",
         "reference": "1610612765"
       },
       "away": {
-        "name": "Washington Wizards",
-        "alias": "WAS",
+        "name": "Miami Heat",
+        "alias": "MIA",
         "id": "583ecea6-fb46-11e1-82cb-f4ce4684ea4c",
         "sr_id": "sr:team:3435",
         "reference": "1610612748"
@@ -102,15 +102,15 @@
         }
       ],
       "home": {
-        "name": "Charlotte Hornets",
-        "alias": "CHA",
+        "name": "New York Knicks",
+        "alias": "NYK",
         "id": "583ec70e-fb46-11e1-82cb-f4ce4684ea4c",
         "sr_id": "sr:team:3421",
         "reference": "1610612752"
       },
       "away": {
-        "name": "Atlanta Hawks",
-        "alias": "ATL",
+        "name": "Los Angeles Lakers",
+        "alias": "LAL",
         "id": "583ecae2-fb46-11e1-82cb-f4ce4684ea4c",
         "sr_id": "sr:team:3427",
         "reference": "1610612747"
@@ -206,70 +206,15 @@
         }
       ],
       "home": {
-        "name": "Orlando Magic",
-        "alias": "ORL",
+        "name": "LA Clippers",
+        "alias": "LAC",
         "id": "583ecdfb-fb46-11e1-82cb-f4ce4684ea4c",
         "sr_id": "sr:team:3425",
         "reference": "1610612746"
       },
       "away": {
-        "name": "Philadelphia 76ers",
-        "alias": "PHI",
-        "id": "583ecf50-fb46-11e1-82cb-f4ce4684ea4c",
-        "sr_id": "sr:team:3411",
-        "reference": "1610612742"
-      }
-    },
-    {
-      "id": "018ab017-10c1-4c72-ba4f-13a4495013c7",
-      "status": "closed",
-      "coverage": "full",
-      "scheduled": "2021-11-24T03:30:00Z",
-      "home_points": 104,
-      "away_points": 112,
-      "track_on_court": true,
-      "sr_id": "sr:match:28809684",
-      "reference": "0022100266",
-      "time_zones": {
-        "venue": "US/Pacific",
-        "home": "US/Pacific",
-        "away": "US/Central"
-      },
-      "venue": {
-        "id": "792ec100-691e-5e16-8ef8-79b2b6ee38ba",
-        "name": "Staples Center",
-        "capacity": 18997,
-        "address": "1111 S. Figueroa Street",
-        "city": "Los Angeles",
-        "state": "CA",
-        "zip": "90015",
-        "country": "USA",
-        "sr_id": "sr:venue:6008"
-      },
-      "broadcasts": [
-        {
-          "network": "BSSC",
-          "type": "TV",
-          "locale": "Home",
-          "channel": "693"
-        },
-        {
-          "network": "BSSW",
-          "type": "TV",
-          "locale": "Away",
-          "channel": "676"
-        }
-      ],
-      "home": {
-        "name": "Boston Celtics",
-        "alias": "BOS",
-        "id": "583ecdfb-fb46-11e1-82cb-f4ce4684ea4c",
-        "sr_id": "sr:team:3425",
-        "reference": "1610612746"
-      },
-      "away": {
-        "name": "Toronto Raptors",
-        "alias": "TOR",
+        "name": "Dallas Mavericks",
+        "alias": "DAL",
         "id": "583ecf50-fb46-11e1-82cb-f4ce4684ea4c",
         "sr_id": "sr:team:3411",
         "reference": "1610612742"
