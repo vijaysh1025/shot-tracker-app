@@ -1,6 +1,7 @@
 package com.shottracker.feature.home.data.remote
 
 import com.shottracker.feature.home.models.DailySchedule
+import com.shottracker.feature.home.models.Hierarchy
 import com.shottracker.feature.home.models.pbp.PlayByPlay
 import com.shottracker.network.Result
 import retrofit2.http.GET
@@ -9,7 +10,7 @@ import retrofit2.http.Path
 interface NbaDataService {
 
     @GET("league/hierarchy.json")
-    fun getLeagueHierarchy()
+    fun getLeagueHierarchy() : Result<Hierarchy>
 
     @GET("games/{year}/{month}/{day}/schedule.json")
     fun getDailySchedule(

@@ -1,4 +1,4 @@
-package com.shottracker.feature.home.data.local
+package com.shottracker.feature.follow.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -8,12 +8,12 @@ import androidx.room.Query
 import com.shottracker.feature.home.models.DailySchedule
 
 @Dao
-interface DailyScheduleDao {
+interface FollowTeamsDao {
 
     @Query("SELECT * FROM dailyschedule where date = :date")
-    suspend fun getGamesForDate(date:String) : DailySchedule
+    suspend fun getFollowedTeams(date:String) : DailySchedule
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveGames(dailySchedule: DailySchedule)
+    suspend fun saveFollowedTeams(list: List)
 
 }
