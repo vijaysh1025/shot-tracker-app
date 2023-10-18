@@ -2,18 +2,18 @@
 
 ### App In Progress
 
-|      Sign In      |                Pick Games             |                  Shot Chart                   |
-|:------------------------:|:---------------------------------------------:|:---------------------------------------------:|
-|<img src="/video/sign-in.gif" width="300"> | <img src="/video/pick-games.gif" width="300"> | <img src="/video/shot-chart.gif" width="300"> |
+|                  Sign In                   |                  Pick Games                   |                  Shot Chart                   |
+|:------------------------------------------:|:---------------------------------------------:|:---------------------------------------------:|
+| <img src="/video/sign-in.gif" width="200"> | <img src="/video/pick-games.gif" width="200"> | <img src="/video/shot-chart.gif" width="200"> |
 
 
 ## Overview
 Pick an NBA game from any date and display the shot chart data of any given player from that game. 
 
 * Architecture - Clean Architecture 
-* Data Layer - Repository with Network (Retrofit)
+* Data Layer - Repository with Network (Retrofit) and Local (Room) data sources
 * Presentation Layer - MVVM
-* Key Technologies - Compose, Retrofit, LiveData
+* Key Technologies - Compose, Retrofit, LiveData, Room, Hilt, Coroutines, Navigation, Firebase Authentication
 
 ## Application Breakdown
 
