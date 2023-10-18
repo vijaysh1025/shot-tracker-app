@@ -4,7 +4,7 @@
 
 |                  Sign In                   |                  Pick Games                   |                  Shot Chart                   |
 |:------------------------------------------:|:---------------------------------------------:|:---------------------------------------------:|
-| <img src="/video/sign-in.gif" width="200"> | <img src="/video/pick-games.gif" width="200"> | <img src="/video/shot-chart.gif" width="200"> |
+| <img src="/video/sign-in.gif" width="240"> | <img src="/video/pick-games.gif" width="240"> | <img src="/video/shot-chart.gif" width="240"> |
 
 
 ## Overview
