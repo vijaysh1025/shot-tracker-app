@@ -3,6 +3,7 @@ package com.shottracker.roomdb
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.shottracker.feature.follow.data.local.FollowTeamsDao
 import com.shottracker.feature.home.data.local.DailyScheduleDao
 import com.shottracker.feature.home.models.DailySchedule
 import com.shottracker.feature.home.typeconverters.GamesItemListTypeConverter
@@ -19,4 +20,6 @@ import com.shottracker.feature.home.typeconverters.LeagueTypeConverter
 @Database(entities = [DailySchedule::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun dailyScheduleDao(): DailyScheduleDao
+
+    abstract fun followTeamsDao(): FollowTeamsDao
 }

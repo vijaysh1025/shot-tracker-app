@@ -2,6 +2,8 @@ package com.shottracker.di
 
 import android.content.Context
 import androidx.room.Room
+import com.shottracker.feature.follow.data.FollowTeamsDataSource
+import com.shottracker.feature.follow.data.local.FollowTeamLocalDataSource
 import com.shottracker.feature.home.data.DailyScheduleDataSource
 import com.shottracker.feature.home.data.DailyScheduleRepository
 import com.shottracker.feature.home.data.DailyScheduleRepositoryImpl
@@ -42,20 +44,20 @@ object AppModule {
      */
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
-    annotation class RemoteDSDataSource
+    annotation class RemoteDataSource
 
     /**
      * Annotation for Local Data Source
      */
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
-    annotation class LocalDSDataSource
+    annotation class LocalDataSource
 
     /**
      * Provide this Data Source for [DailyScheduleDataSource] marked with @RemoteDSDataSource annotation
      */
     @Singleton
-    @RemoteDSDataSource
+    @RemoteDataSource
     @Provides
     fun provideDailyScheduleRemoteDataSource(nbaDataService: NbaDataService, @ApplicationContext context: Context): DailyScheduleDataSource {
         return DailyScheduleRemoteDataSource(nbaDataService, context)
@@ -65,7 +67,7 @@ object AppModule {
      * Provide this Data Source for [DailyScheduleDataSource] marked with @LocalDSDataSource annotation
      */
     @Singleton
-    @LocalDSDataSource
+    @LocalDataSource
     @Provides
     fun provideDailyScheduleLocalDataSource(
         database: AppDatabase,
@@ -77,10 +79,25 @@ object AppModule {
     }
 
     /**
+     * Provide this Data Source for [DailyScheduleDataSource] marked with @LocalDSDataSource annotation
+     */
+    @Singleton
+    @LocalDataSource
+    @Provides
+    fun provideFollowedTeamDataSource(
+        database: AppDatabase,
+        ioDispatcher: CoroutineDispatcher
+    ): FollowTeamsDataSource {
+        return FollowTeamLocalDataSource(
+            database.followTeamsDao(), ioDispatcher
+        )
+    }
+
+    /**
      * Provide this Data Source for [DailyScheduleDataSource] marked with @RemoteDSDataSource annotation
      */
     @Singleton
-    @RemoteDSDataSource
+    @RemoteDataSource
     @Provides
     fun providePlayByPlayDataSource(nbaDataService: NbaDataService, @ApplicationContext context: Context): PlayByPlayDataSource {
         return PlayByPlayRemoteDataSource(nbaDataService, context)
